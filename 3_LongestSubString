@@ -1,0 +1,40 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  let length = 0,
+    max = 0,
+    map = {},
+    j = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (i == s.length - 1 && map[s[i]] === undefined) {
+      length += 1;
+      if (length > max) {
+        max = length;
+      }
+      return max;
+    }
+    //  Normal Iteration
+    if (map[s[i]] === undefined) {
+      map[s[i]] = 0;
+      length += 1;
+    } else {
+      if (length > max) {
+        max = length;
+      }
+      length = 0;
+      map = {};
+      i = j;
+      j++;
+    }
+  }
+  return max;
+};
+
+//  My brute force. First thought soln ^^
+/* Loop array while keeping track of length until conditions are broken
+if length > max length recoreded max = length
+*/
+
+/* To get time complexity down to O(n) use sliding window approach */

@@ -1,0 +1,59 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+// var twoSum = function(nums, target) {
+//     const arr = []
+//     for(let i = 0; i<nums.length;i++){
+//         console.log('here')
+//         for(let j = 0;j<nums.length;j++){
+//             if(nums[i]+nums[j] == target && i !=j  ){
+//                 arr.push(i)
+//                 arr.push(j)
+//                 return arr
+//             }
+//         }
+//     }
+// };
+
+// Brute Force Solution: Loop Array Twice
+//  Other solutions:
+//  Hash Tables
+/* 
+To improve run time => more efficient way if compliment exists.
+simple implementation = add value as key && index as a value to the has table. Then check if target - num[i] exists in hash table. => ( value = index). Cannot be nums [i]
+
+Time: O(n) - Has to traverse the array containing n elements twice. add element to hash table and then again to search for compliment of n[i]
+Space: O(n) - extra space required depnds on # of items stored in has table. which at most stores n elements.
+
+* approach three hash table and searching for compliment can be done in one pass
+*/
+
+//  Approach 3 solution.
+
+// var twoSum = function(nums, target) {
+//         let obj = {}
+//         for( let i = 0 ; i < nums.length; i++){
+//             let compliment =  target - nums[i]
+//              if(compliment in obj){
+//                  return [i,obj[compliment]]
+//             }
+//             else{
+//                 obj[nums[i]] = i
+//             }
+//         }
+// };
+
+//  Refractor Again after looking at solns submitted by others
+
+var twoSum = function (nums, target) {
+  const store = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (store[nums[i]] !== undefined) {
+      return [i, store[nums[i]]];
+    } else {
+      store[target - nums[i]] = i;
+    }
+  }
+};
